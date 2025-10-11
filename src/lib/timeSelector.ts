@@ -23,3 +23,12 @@ export const API_timeSelector = {
 };
 
 export type InternalTimeSelector = keyof typeof timeSelectorOptions;
+
+/**
+ * Type guard for type `InternalTimeSelector`
+ * @param value The value to check
+ * @returns true if `value` is of type `InternalTimeSelector`, false otherwise
+ */
+export function isInternalTimeSelector(value: string): value is InternalTimeSelector {
+    return Object.keys(timeSelectorOptions).includes(value);
+}

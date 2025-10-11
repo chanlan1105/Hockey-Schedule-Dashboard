@@ -1,39 +1,12 @@
+import { API_GameDataFields, GameEntryOptions } from "@/lib/gameListing";
 import { API_timeSelector, InternalTimeSelector } from "@/lib/timeSelector";
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
-import { JSX } from "react";
+import { Suspense, use } from "react";
 
 /**
- * Required options to display game listings on frontend UI
+ * @param options The information for this game.
+ * @returns React component representing one row in the GameListing table.
  */
-interface GameEntryOptions {
-    /** The date and time of the game, formatted in human-readable format */
-    datetime: JSX.Element,
-    /** The game number as a string or number */
-    gameNum: string | number,
-    /** Category, ex. MD AA */
-    category: string,
-    /** Location */
-    location: string,
-    /** The visiting team */
-    visitor: string,
-    /** The local team */
-    local: string
-}
-
-/**
- * Required fields to extract from fetched API game data
- */
-interface API_GameDataFields {
-    game_date: string,
-    startTime: string,
-    gameNumber: number,
-    divisionName: string,
-    levelName: string,
-    locationName: string,
-    awayTeamName: string,
-    homeTeamName: string
-}
-
 function GameEntry(options: GameEntryOptions) {
     return <TableRow key={options.gameNum} className="bg-white dark_border-gray-700 dark_bg-gray-800 text-gray-900 dark:text-white">
         {
@@ -44,7 +17,7 @@ function GameEntry(options: GameEntryOptions) {
     </TableRow>;
 }
 
-export default async function GameListing({ timeSelector }: { timeSelector: InternalTimeSelector }) {
+async function fetchData(timeSelector: InternalTimeSelector) {
     const gameData = await fetch("https://scoresheets.ca/classes/TournamentPublicData.php", {
         "headers": {
             "accept": "application/json, text/javascript, */*; q=0.01",
@@ -65,6 +38,12 @@ export default async function GameListing({ timeSelector }: { timeSelector: Inte
     });
 
     const gameDataJSON: API_GameDataFields[] = (await gameData.json()).data;
+
+    return gameDataJSON;
+}
+
+export default function GameListing({ timeSelector }: { timeSelector: InternalTimeSelector }) {
+    const gameDataJSON = use(fetchData(timeSelector));
 
     return <div className="overflow-x-auto">
         <Table hoverable>
