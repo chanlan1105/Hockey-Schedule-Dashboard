@@ -8,7 +8,7 @@ import { Suspense, use } from "react";
  * @returns React component representing one row in the GameListing table.
  */
 function GameEntry(options: GameEntryOptions) {
-    return <TableRow key={options.gameNum} className="bg-white dark_border-gray-700 dark_bg-gray-800 text-gray-900 dark:text-white">
+    return <TableRow key={options.gameNum} className="bg-white dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
         {
             Object.entries(options).map(([label, option]) => 
                 <TableCell key={label} className="text-center text-gray-800 dark:text-white px-3 py-2 text-xs">{option}</TableCell>
