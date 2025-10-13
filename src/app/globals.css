@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+    themes: false;
+}
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../../.flowbite-react/class-list.json";
 
@@ -30,5 +33,11 @@ body {
 @layer components {
     tr {
         border-color: inherit;
+    }
+}
+
+@layer utilities {
+    .collapse-arrow > .collapse-title:after {
+        right: 1.5rem;
     }
 }

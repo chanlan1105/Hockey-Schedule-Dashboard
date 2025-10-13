@@ -1,4 +1,4 @@
-import GameListing from "@/components/GameListing";
+import GameListing from "@/components/GameListing/GameListing";
 import TimeSelector from "@/components/TimeSelector";
 import { InternalTimeSelector, isInternalTimeSelector } from "@/lib/timeSelector";
 import { SearchParams } from "next/dist/server/request/search-params";
