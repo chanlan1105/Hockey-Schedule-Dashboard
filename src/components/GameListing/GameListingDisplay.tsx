@@ -6,7 +6,7 @@ import GameTable from "./GameTable";
 import Filters from "./Filters";
 import GameListingContext from "@/context/GameListingContext";
 
-export default function GameListingDisplay({ homeLocations, locations, gameDataJSON }: { homeLocations: string[]; locations: string[]; gameDataJSON: API_GameDataFields[]; }) {
+export default function GameListingDisplay({ homeLocations, locations, gameDataJSON }: { homeLocations: string[], locations: string[], gameDataJSON: API_GameDataFields[] }) {
     const allLocations = homeLocations.concat(locations);
 
     const [checked, setChecked] = useState(

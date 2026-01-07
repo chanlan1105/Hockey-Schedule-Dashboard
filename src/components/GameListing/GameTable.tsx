@@ -1,4 +1,4 @@
-import { API_GameDataFields, GameEntryOptions } from "@/lib/gameListing";
+import { GameEntryOptions, API_GameDataFields } from "@/lib/gameListing";
 import { Table, TableHead, TableRow, TableHeadCell, TableBody, TableCell } from "flowbite-react";
 
 /**
@@ -30,10 +30,10 @@ export default function GameTable({ gameDataJSON, locations }: { gameDataJSON: A
             </TableHead>
             <TableBody className="divide-y border-gray-200">
                 {
-                    gameDataJSON.map(({ game_date, startTime, gameNumber, divisionName, levelName, locationName, homeTeamName, awayTeamName }) =>
+                    gameDataJSON.map(({ game_date, startTime, gameNumber, divisionName, levelName, locationName, homeTeamName, awayTeamName, tournamentId }) =>
                         locations[locationName] ? (
                             <GameEntry
-                                key={gameNumber}
+                                key={`${tournamentId}-${gameNumber}`}
                                 datetime={<>{game_date}<br />{startTime}</>}
                                 gameNum={gameNumber}
                                 category={`${divisionName.replace("oins de ", "").replace(" ans", "")} ${levelName}`}

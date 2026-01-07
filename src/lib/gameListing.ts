@@ -29,5 +29,14 @@ export interface API_GameDataFields {
     levelName: string,
     locationName: string,
     awayTeamName: string,
-    homeTeamName: string
+    homeTeamName: string,
+    tournamentId: scoresheetsTournaments
 }
+
+/**
+ * Enum of URL encoded tournaments/leagues from scoresheets.ca to pull data from
+ */
+export enum scoresheetsTournaments {
+    GrandMontreal = 15,
+    CHL = 18
+};
