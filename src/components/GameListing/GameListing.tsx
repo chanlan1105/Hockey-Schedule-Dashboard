@@ -42,11 +42,30 @@ async function fetchData(timeSelector: InternalTimeSelector, tournaments: scores
             },
             "body": `filterBy=tournament&filterRange=${API_timeSelector[timeSelector]}&getTournamentGameList=TournamentPublicData&divisionId=-1&tournamentId=${tournament}&levelId=-1&sortingColumn=date&sortingOrder=asc&searchInp=`,
             "method": "POST"
-        }).then(res =>
-            res.json().then(data => {
-                return  data.data as API_GameDataFields[];
-            })
-        )
+        }).then(async res => {
+            const rawText = await res.text();
+
+            try {
+                const data = JSON.parse(rawText);
+                if (data.resp)
+                    return data.data as API_GameDataFields[];
+                else 
+                    return [];
+            }
+            catch (err) {
+                if (rawText.includes(`"resp":false`)) {
+                    // No games on this day.
+                    return [];
+                }
+                else {
+                    throw new Error(
+                        err instanceof Error ? err.message :
+                        typeof err == "string" ? err : "JSON parse error",
+                        { cause: err }
+                    );
+                }
+            }
+        })
     );
 
     const allGameData = await Promise.all(requests);
