@@ -115,7 +115,7 @@ async function fetchData(timeSelector: InternalTimeSelector, tournaments: scores
 const homeLocationRegex = /^centre civique ddo [0-9]$|^pierrefonds [0-9]$|^cs st-raphael( [0-9])?$|^complexe sportif st-raphael$/i;
 
 export default function GameListing({ timeSelector }: { timeSelector: InternalTimeSelector }) {
-    const gameDataJSON = use(fetchData(timeSelector, [ scoresheetsTournaments.GrandMontreal, scoresheetsTournaments.CHL ]));
+    const gameDataJSON = use(fetchData(timeSelector, Object.values(scoresheetsTournaments).filter(v => typeof v === 'number') as scoresheetsTournaments[]));
 
     const [homeLocations, locations] = [...new Set(gameDataJSON.map(({ locationName }) => locationName))]
         .sort()
