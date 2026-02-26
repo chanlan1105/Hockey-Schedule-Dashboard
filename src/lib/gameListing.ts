@@ -39,5 +39,8 @@ export interface API_GameDataFields {
 export enum scoresheetsTournaments {
     GrandMontreal = 15,
     CHL = 18,
-    LRLSL = 20
+    LRLSL = 20,
+    CHL_Series = 22,
+    GrandMontreal_Series = 25,
+    LSL_Regionals = 26
 };
