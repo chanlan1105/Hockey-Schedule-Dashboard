@@ -1,4 +1,4 @@
-import { GameEntryOptions, API_GameDataFields } from "@/lib/gameListing";
+import { GameEntryOptions, FlatGameDataFields } from "@/lib/gameListing";
 import { Table, TableHead, TableRow, TableHeadCell, TableBody, TableCell } from "flowbite-react";
 
 /**
@@ -15,7 +15,7 @@ function GameEntry(options: GameEntryOptions) {
     </TableRow>;
 }
 
-export default function GameTable({ gameDataJSON, locations }: { gameDataJSON: API_GameDataFields[], locations: { [k: string]: boolean } }) {
+export default function GameTable({ gameDataJSON, locations }: { gameDataJSON: FlatGameDataFields[], locations: { [k: string]: boolean } }) {
     return <div className="overflow-x-auto">
         <Table hoverable>
             <TableHead>
@@ -30,11 +30,11 @@ export default function GameTable({ gameDataJSON, locations }: { gameDataJSON: A
             </TableHead>
             <TableBody className="divide-y border-gray-200">
                 {
-                    gameDataJSON.map(({ game_date, startTime, gameNumber, divisionName, levelName, locationName, homeTeamName, awayTeamName, tournamentId }) =>
+                    gameDataJSON.map(({ flat_date, flat_time, gameNumber, divisionName, levelName, locationName, homeTeamName, awayTeamName, tournamentId, leagueId }) =>
                         locations[locationName] ? (
                             <GameEntry
-                                key={`${tournamentId}-${gameNumber}`}
-                                datetime={<>{game_date}<br />{startTime}</>}
+                                key={`${tournamentId ?? leagueId}-${gameNumber}`}
+                                datetime={<>{flat_date}<br />{flat_time}</>}
                                 gameNum={gameNumber}
                                 category={`${divisionName.replace("oins de ", "").replace(" ans", "")} ${levelName}`}
                                 location={locationName}

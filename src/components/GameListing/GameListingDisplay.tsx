@@ -1,12 +1,12 @@
 "use client";
 
-import { API_GameDataFields } from "@/lib/gameListing";
+import { FlatGameDataFields } from "@/lib/gameListing";
 import { useState, useCallback } from "react";
 import GameTable from "./GameTable";
 import Filters from "./Filters";
 import GameListingContext from "@/context/GameListingContext";
 
-export default function GameListingDisplay({ homeLocations, locations, gameDataJSON }: { homeLocations: string[], locations: string[], gameDataJSON: API_GameDataFields[] }) {
+export default function GameListingDisplay({ homeLocations, locations, gameDataJSON }: { homeLocations: string[], locations: string[], gameDataJSON: FlatGameDataFields[] }) {
     const allLocations = homeLocations.concat(locations);
 
     const [checked, setChecked] = useState(
