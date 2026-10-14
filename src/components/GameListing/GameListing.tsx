@@ -152,6 +152,7 @@ async function fetchData(timeSelector: InternalTimeSelector, tournaments: scores
             const data = JSON.parse(rawText);
 
             return data.map((d: any) => ({
+                id: d.id,
                 date_time: dayjs(d.startTime),
                 gameNumber: d.number,
                 divisionName: d.category.i18n.fr.name.split(" ")[0],
@@ -212,7 +213,7 @@ async function fetchData(timeSelector: InternalTimeSelector, tournaments: scores
     return sortedGames;
 }
 
-const homeLocationRegex = /^centre civique ddo [0-9]$|^pierrefonds [0-9]$|^cs st-raphael( [0-9])?$|^complexe sportif st-raphael$/i;
+const homeLocationRegex = /^cc-ddo-[1-3]$|^pierrefonds-[1-4]$|^v-lecavalier$/i;
 
 export default function GameListing({ timeSelector }: { timeSelector: InternalTimeSelector }) {
     const gameDataJSON = use(fetchData(

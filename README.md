@@ -38,6 +38,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 Components from [Daisy UI](https://daisyui.com/docs/intro/) and [Flowbite-React](https://flowbite-react.com/docs/getting-started/introduction).
 
+Icons from [Flowbite Icons](https://flowbite.com/icons/).
+
 <!-- ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

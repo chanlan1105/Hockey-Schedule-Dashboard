@@ -1,5 +1,5 @@
 import dayjs from "dayjs"
-import { JSX } from "react"
+import { JSX, ReactNode } from "react"
 
 /**
  * Required options to display game listings on frontend UI
@@ -16,13 +16,16 @@ export interface GameEntryOptions {
     /** The visiting team */
     visitor: string,
     /** The local team */
-    local: string
+    local: string,
+    /** Link to the game sheet if available */
+    gameSheet?: ReactNode
 }
 
 /**
  * Fields required to represent a game internally
  */
 export interface GameDataFields {
+    id?: number,
     date_time: dayjs.Dayjs,
     gameNumber: number,
     divisionName: string,
@@ -61,12 +64,12 @@ export interface ScoresheetsAPI_Fields {
  * Enum of URL encoded tournaments/leagues from scoresheets.ca to pull data from
  */
 export enum scoresheetsTournaments {
-    GrandMontreal = 15,
-    CHL = 18,
-    LRLSL = 20,
-    CHL_Series = 22,
-    GrandMontreal_Series = 25,
-    LSL_Regionals = 26
+    // GrandMontreal = 15,
+    // CHL = 18,
+    // LRLSL = 20,
+    // CHL_Series = 22,
+    // GrandMontreal_Series = 25,
+    // LSL_Regionals = 26
 };
 
 /**
@@ -74,5 +77,7 @@ export enum scoresheetsTournaments {
  */
 export enum spordlePageLeagues {
     LQHF = 8508,
-    LHEQF = 9176
+    LHEQF = 9176,
+    LRLSL = 5956,
+    LHGM = 6082
 };
