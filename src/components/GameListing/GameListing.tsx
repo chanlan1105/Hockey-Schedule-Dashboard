@@ -3,7 +3,12 @@ import { API_timeSelector, InternalTimeSelector } from "@/lib/timeSelector";
 import { use } from "react";
 import GameListingDisplay from "./GameListingDisplay";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import Heap from "heap-js";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 /**
  * Represents a node in the min-heap of game listings across multiple tournaments.
@@ -224,8 +229,8 @@ export default function GameListing({ timeSelector }: { timeSelector: InternalTi
         return {
             ...game,
             date_time: undefined,
-            flat_date: game.date_time.format("YYYY-MM-DD"),
-            flat_time: game.date_time.format("HH:mm")
+            flat_date: game.date_time.tz("America/Toronto").format("YYYY-MM-DD"),
+            flat_time: game.date_time.tz("America/Toronto").format("HH:mm")
         }
     });
 
